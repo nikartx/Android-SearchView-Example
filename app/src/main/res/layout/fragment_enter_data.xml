@@ -1,0 +1,36 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="ru.nikartm.android_searchview_example.fragment.EnterDataFragment">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/material_drawer_vertical_padding"
+        android:layout_marginStart="@dimen/material_drawer_account_header_horizontal_top"
+        android:layout_marginEnd="@dimen/material_drawer_account_header_horizontal_top">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/tiet_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="text"
+            android:hint="@string/user_name" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_search_followers"
+        android:layout_marginTop="@dimen/material_drawer_vertical_padding"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/search_followers"
+        android:backgroundTint="@color/colorPrimaryLight"
+        android:textColor="@color/colorSecondaryText"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

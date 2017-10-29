@@ -18,8 +18,8 @@ public class AppProgressDialog {
             progress.setMessage("Please wait...");
             progress.setCanceledOnTouchOutside(false);
             progress.setCancelable(false);
+            progress.show();
         }
-        progress.show();
     }
 
     public static void dismiss() {

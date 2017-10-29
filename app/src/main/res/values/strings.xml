@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">GitHub Viewer</string>
 
+    <string name="user_name">User name</string>
+    <string name="search_followers">Search followers</string>
+
 </resources>

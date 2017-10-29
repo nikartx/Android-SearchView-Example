@@ -1,15 +1,17 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ru.nikartm.android_searchview_example.fragment.FollowersFragment">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_material_list"
+        android:id="@+id/rv_follower_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="7dp"
         android:clipToPadding="false"
+        android:nestedScrollingEnabled="false"
         android:scrollbars="vertical"
         tools:listitem="@layout/follower_item" />
 
-</FrameLayout>
+</LinearLayout>
