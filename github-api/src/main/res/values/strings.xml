@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">github-api</string>
+
+    <!-- Base Api GitHub v3 URL -->
+    <string name="base_url">https://api.github.com/</string>
+
 </resources>
