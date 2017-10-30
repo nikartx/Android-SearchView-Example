@@ -26,5 +26,6 @@ public class AppProgressDialog {
         if (progress != null && progress.isShowing()) {
             progress.dismiss();
         }
+        progress = null;
     }
 }

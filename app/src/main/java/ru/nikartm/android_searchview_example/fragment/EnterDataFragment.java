@@ -4,6 +4,7 @@ package ru.nikartm.android_searchview_example.fragment;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +48,7 @@ public class EnterDataFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.app_name);
         btnSearchFollowers.setOnClickListener(v -> getFollowers(tietUserName.getText().toString()));
     }
 

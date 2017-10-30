@@ -3,6 +3,7 @@ package ru.nikartm.android_searchview_example.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -42,6 +43,7 @@ public class FollowersFragment extends Fragment implements AdapterClickListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_followers, container, false);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.followers);
         recyclerView = (RecyclerView) view.findViewById(R.id.rv_follower_list);
         if (getArguments() != null) {
             followers = getArguments().getParcelableArrayList(FOLLOWERS);
