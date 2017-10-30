@@ -6,30 +6,36 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ru.nikartm.android_searchview_example.R;
 import ru.nikartm.android_searchview_example.util.ImageReader;
+import ru.nikartm.android_searchview_example.util.Util;
 import ru.nikartm.github_api.model.Follower;
 
 /**
  * @author Ivan V on 29.10.2017.
  * @version 1.0
  */
-public class FollowerListAdapter extends RecyclerView.Adapter<FollowerListAdapter.FollowerViewHolder> {
+public class FollowerListAdapter extends RecyclerView.Adapter<FollowerListAdapter.FollowerViewHolder> implements Filterable {
 
     private static final String TAG = FollowerListAdapter.class.getSimpleName();
 
     private Context context;
     private List<Follower> followers;
+    private List<Follower> filteredList;
     private static AdapterClickListener clickListener = null;
 
     public FollowerListAdapter(Context context, List<Follower> followers) {
         this.context = context;
         this.followers = followers;
+        this.filteredList = followers;
     }
 
     public static class FollowerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -69,8 +75,8 @@ public class FollowerListAdapter extends RecyclerView.Adapter<FollowerListAdapte
 
     @Override
     public void onBindViewHolder(FollowerViewHolder holder, int position) {
-        if (followers.size() > 0) {
-            Follower follower = followers.get(position);
+        if (filteredList.size() > 0) {
+            Follower follower = filteredList.get(position);
             if (follower != null) {
                 ImageReader.setCircleImage(context, holder.ivLogo, follower.getAvatarUrl());
                 holder.tvUserName.setText(follower.getLogin());
@@ -78,6 +84,31 @@ public class FollowerListAdapter extends RecyclerView.Adapter<FollowerListAdapte
                 holder.tvGithubURL.setText(follower.getUrl());
             }
         }
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    filteredList = followers;
+                } else {
+                    filteredList = Util.searchFollowersFilter(followers, charString);
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                filteredList = (ArrayList<Follower>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     @Override
@@ -92,7 +123,7 @@ public class FollowerListAdapter extends RecyclerView.Adapter<FollowerListAdapte
 
     @Override
     public int getItemCount() {
-        return followers == null ? 0 : followers.size();
+        return filteredList == null ? 0 : filteredList.size();
     }
 
 }

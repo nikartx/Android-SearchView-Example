@@ -4,5 +4,6 @@
     <string name="user_name">User name</string>
     <string name="search_followers">Search followers</string>
     <string name="followers">Followers</string>
+    <string name="search">Search</string>
 
 </resources>
