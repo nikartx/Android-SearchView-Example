@@ -18,18 +18,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ru.nikartm.android_searchview_example.R;
-import ru.nikartm.android_searchview_example.adapter.AdapterClickListener;
 import ru.nikartm.android_searchview_example.adapter.FollowerListAdapter;
 import ru.nikartm.github_api.model.Follower;
 
 
-public class FollowersFragment extends Fragment implements AdapterClickListener {
+public class FollowersFragment extends Fragment {
 
     public static final String FOLLOWERS = "followers";
 
@@ -64,14 +62,8 @@ public class FollowersFragment extends Fragment implements AdapterClickListener 
 
     private void onFollowerList() {
         adapter = new FollowerListAdapter(getActivity(), followers);
-        adapter.setClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public void itemClicked(View view, int position) {
-        Toast.makeText(getActivity(), "Show GitHub " + followers.get(position).getLogin(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

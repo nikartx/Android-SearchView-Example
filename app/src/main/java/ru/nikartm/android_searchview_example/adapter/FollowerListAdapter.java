@@ -10,6 +10,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,6 @@ public class FollowerListAdapter extends RecyclerView.Adapter<FollowerListAdapte
     private Context context;
     private List<Follower> followers;
     private List<Follower> filteredList;
-    private static AdapterClickListener clickListener = null;
 
     public FollowerListAdapter(Context context, List<Follower> followers) {
         this.context = context;
@@ -38,7 +38,7 @@ public class FollowerListAdapter extends RecyclerView.Adapter<FollowerListAdapte
         this.filteredList = followers;
     }
 
-    public static class FollowerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class FollowerViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
         ImageView ivLogo;
         TextView tvUserName;
@@ -52,19 +52,7 @@ public class FollowerListAdapter extends RecyclerView.Adapter<FollowerListAdapte
             tvUserName = (TextView) view.findViewById(R.id.tv_user_name);
             tvUserId = (TextView) view.findViewById(R.id.tv_user_id);
             tvGithubURL = (TextView) view.findViewById(R.id.tv_github_url);
-            cardView.setOnClickListener(this);
         }
-
-        @Override
-        public void onClick(View v) {
-            if(clickListener != null) {
-                clickListener.itemClicked(v, getAdapterPosition());
-            }
-        }
-    }
-
-    public void setClickListener(AdapterClickListener clickListener) {
-        FollowerListAdapter.clickListener = clickListener;
     }
 
     @Override
@@ -78,12 +66,18 @@ public class FollowerListAdapter extends RecyclerView.Adapter<FollowerListAdapte
         if (filteredList.size() > 0) {
             Follower follower = filteredList.get(position);
             if (follower != null) {
+                holder.cardView.setOnClickListener(v -> onCardClick(position));
                 ImageReader.setCircleImage(context, holder.ivLogo, follower.getAvatarUrl());
                 holder.tvUserName.setText(follower.getLogin());
                 holder.tvUserId.setText(String.valueOf(follower.getId()));
                 holder.tvGithubURL.setText(follower.getUrl());
             }
         }
+    }
+
+    // Handle click by card github user
+    private void onCardClick(int position) {
+        Toast.makeText(context, "Show GitHub " + filteredList.get(position).getLogin(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
