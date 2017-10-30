@@ -3,6 +3,7 @@ package ru.nikartm.android_searchview_example.fragment;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
@@ -16,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -82,6 +84,7 @@ public class FollowersFragment extends Fragment implements AdapterClickListener 
             searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
         }
         initSearch(searchView);
+//        customizeSearchView(searchView);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -103,6 +106,25 @@ public class FollowersFragment extends Fragment implements AdapterClickListener 
                 return true;
             }
         });
+    }
+
+    // If need we can customize SearchView elements
+    private void customizeSearchView(SearchView searchView) {
+        SearchView.SearchAutoComplete searchAutoComplete = (SearchView.SearchAutoComplete)searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        searchAutoComplete.setHintTextColor(Color.LTGRAY);
+        searchAutoComplete.setTextColor(Color.GRAY);
+
+        View searchPlate = searchView.findViewById(android.support.v7.appcompat.R.id.search_plate);
+        searchPlate.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+
+        ImageView searchCloseIcon = (ImageView)searchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
+        searchCloseIcon.setColorFilter(getResources().getColor(R.color.colorSecondaryText));
+
+//        ImageView voiceIcon = (ImageView)searchView.findViewById(android.support.v7.appcompat.R.id.search_voice_btn);
+//        voiceIcon.setImageResource(R.drawable.abc_ic_voice_search);
+//
+//        ImageView searchIcon = (ImageView)searchView.findViewById(android.support.v7.appcompat.R.id.search_mag_icon);
+//        searchIcon.setImageResource(R.drawable.abc_ic_search);
     }
 
 }
