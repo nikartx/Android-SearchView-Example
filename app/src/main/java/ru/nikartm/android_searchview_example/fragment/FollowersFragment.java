@@ -70,11 +70,7 @@ public class FollowersFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
         MenuItem search = menu.findItem(R.id.search);
-        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(search);
-        if (searchManager != null) {
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
-        }
         initSearch(searchView);
 //        customizeSearchView(searchView);
         super.onCreateOptionsMenu(menu, inflater);
@@ -102,6 +98,10 @@ public class FollowersFragment extends Fragment {
 
     // If need we can customize SearchView elements
     private void customizeSearchView(SearchView searchView) {
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        if (searchManager != null) {
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        }
         SearchView.SearchAutoComplete searchAutoComplete = (SearchView.SearchAutoComplete)searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         searchAutoComplete.setHintTextColor(Color.LTGRAY);
         searchAutoComplete.setTextColor(Color.GRAY);
